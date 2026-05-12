@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Research · CSLab @ PNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<style>
+.topic{display:grid;grid-template-columns:160px 1fr 520px;gap:48px;padding:72px 0;border-top:1px solid var(--ink);align-items:start}
+.topic:last-of-type{border-bottom:1px solid var(--ink)}
+.topic .num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.2em}
+.topic .num small{display:block;color:var(--ink-3);font-size:10px;margin-top:6px}
+.topic h2{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.2vw,60px);line-height:1.05;letter-spacing:-.02em;margin:0 0 24px}
+.topic h2 em{font-style:italic;color:var(--accent)}
+.topic .lede{font-size:15.5px;line-height:1.75;color:var(--ink-2);text-wrap:pretty;margin:0 0 22px;max-width:62ch}
+.topic .body p{font-size:14px;line-height:1.75;color:var(--ink-2);margin:0 0 14px;text-wrap:pretty}
+.topic .tags{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}
+.topic .pubs{margin-top:28px;padding-top:24px;border-top:1px dashed var(--line-strong)}
+.topic .pubs h4{margin:0 0 16px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;font-weight:500}
+.topic .pubs ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.topic .pubs li{display:grid;grid-template-columns:100px 1fr;gap:14px;font-size:13.5px;line-height:1.5;padding:8px 0;border-bottom:1px solid var(--line)}
+.topic .pubs li:last-child{border-bottom:0}
+.topic .pubs .venue{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em}
+.topic .pubs a{color:var(--ink);text-decoration:none;display:inline-flex;align-items:baseline;gap:8px;transition:color .15s}
+.topic .pubs a:hover{color:var(--accent)}
+.topic .pubs a b{font-weight:600}
+.topic .pubs a .arr{font-family:var(--mono);font-size:11px;color:var(--ink-3);opacity:0;transition:opacity .15s,transform .15s}
+.topic .pubs a:hover .arr{opacity:1;transform:translateX(2px);color:var(--accent)}
+.topic figure{margin:0;position:sticky;top:96px}
+.topic figure .frame{background:#fff;border:1px solid var(--line);position:relative;overflow:hidden;border-radius:4px;padding:18px}
+.topic figure .frame img{width:100%;height:auto;display:block}
+.topic figure .meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:14px;background:var(--line);border:1px solid var(--line)}
+.topic figure .meta div{background:#fff;padding:14px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
+.topic figure .meta div b{display:block;font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;margin-top:6px}
+@media(max-width:1100px){.topic{grid-template-columns:1fr;gap:24px}.topic figure{position:static}}
+</style>
+</head>
+<body id="top">
+<div id="site-header"></div>
+
+<header class="page-head" data-screen-label="01 Research">
+  <div class="breadcrumb"><a href="index.html">CSLab</a><span class="sep">/</span><span>Research</span></div>
+  <span class="eyebrow">— 03 / Research Topics</span>
+  <h1 class="page-title">Research Topics.
+</h1>
+  <p class="page-lede"></p>
+</header>
+
+<section class="section" data-screen-label="Topics" style="padding-top:40px">
+
+<article class="topic" id="r01">
+  <div class="num">R / 01<small>Hardware-assisted<br/>System Security</small></div>
+  <div class="body">
+    <h2>Hardware-assisted<br/><em>System Security</em>.</h2>
+    <p class="lede">상용 프로세서에 탑재된 하드웨어 보안 기능을 효과적으로 활용하여, 다양한 컴퓨팅 시스템에서 동작하는 하드웨어 기반 시스템 보안 기술을 연구합니다.</p>
+    <p>오늘날 컴퓨팅 시스템에 대한 다양한 보안 위협이 보고되고 있으며, 위협의 대상이 되는 컴퓨팅 시스템 역시 안전이 매우 중요한 자율주행자동차나 임베디드 의료기기로까지 확장되고 있습니다. 본 연구실은 이러한 보안 위협에 대응하기 위해 다양한 컴퓨팅 시스템에서 활용 가능한 하드웨어 기반 시스템 보안 기술을 연구합니다. 특히 컴파일러 기술 및 운영체제 기술 등을 활용하여, ARM TrustZone, Intel SGX, ARM Pointer Authentication 등 상용 프로세서에 탑재된 하드웨어 보안 기능을 효과적으로 활용하는 것을 목표로 합니다.</p>
+    <div class="tags"><span class="tag">컴파일러</span><span class="tag">운영체제</span><span class="tag">임베디드 시스템</span><span class="tag">어셈블리 프로그래밍</span></div>
+    <div class="pubs">
+      <h4>— Representative Publications</h4>
+      <ul>
+        <li><span class="venue">Security '19</span><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/kwon" target="_blank" rel="noopener"><b>uXOM</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">DAC '24</span><a href="https://dl.acm.org/doi/10.1145/3649329.3655949" target="_blank" rel="noopener"><b>Micro-Fat Pointer</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">ACSAC '25</span><a href="https://doi.org/10.1109/ACSAC67867.2025.00030" target="_blank" rel="noopener"><b>ELK</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">ACSAC '25</span><a href="https://doi.org/10.1109/ACSAC67867.2025.00029" target="_blank" rel="noopener"><b>SMORE</b><span class="arr">↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <figure>
+    <div class="frame"><img src="assets/research/uxom.jpg" alt="uXOM-enabled binary instrumentation pipeline"/></div>
+    <div class="meta">
+      <div>FOCUS<b>HW-assisted Security</b></div>
+      <div>PLATFORM<b>ARM · x86</b></div>
+      <div>STACK<b>Compiler · OS</b></div>
+      <div>
+</div>
+    </div>
+  </figure>
+</article>
+
+<article class="topic" id="r02">
+  <div class="num">R / 02<small>Architectural Supports<br/>for System Security</small></div>
+  <div class="body">
+    <h2>Architectural Supports<br/>for <em>System Security</em>.</h2>
+    <p class="lede">RISC-V Open ISA를 활용해 새로운 시스템 보안 기능을 직접 설계하고, 이를 기반으로 한 보안 솔루션 개발 연구를 수행합니다.</p>
+    <p>빠르게 변화하는 보안 위협들에 대응하기 위해서는 보안 기능들을 빠르게 컴퓨팅 시스템에 추가할 수 있어야 합니다. 하지만 상용 프로세서들의 경우 보안 기능 도입에 보수적인 입장을 취하고 있어, 새로운 보안 기능을 도입하는데 어려움이 있습니다. 이러한 한계를 극복하기 위해, 본 연구실은 누구나 보안 기능을 직접 설계할 수 있는 RISC-V Open ISA를 활용하여 새로운 시스템 보안 기능을 직접 설계하고, 이를 기반으로 한 보안 솔루션 개발 연구를 수행합니다.</p>
+    <div class="tags"><span class="tag">컴퓨터구조</span><span class="tag">컴파일러</span><span class="tag">하드웨어 설계</span><span class="tag">RISC-V</span></div>
+    <div class="pubs">
+      <h4>— Representative Publications</h4>
+      <ul>
+        <li><span class="venue">ICCAD '20</span><a href="https://ieeexplore.ieee.org/document/9256494" target="_blank" rel="noopener"><b>RIMI</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">DATE '19</span><a href="https://past.date-conference.com/proceedings-archive/2019/pdf/0619.pdf" target="_blank" rel="noopener"><b>RISKIM</b><span class="arr">↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <figure>
+    <div class="frame"><img src="assets/research/pemi.jpg" alt="Microarchitecture of PEMI on a RISC-V processor"/></div>
+    <div class="meta">
+      <div>FOCUS<b>ISA Design</b></div>
+      <div>PLATFORM<b>RISC-V · FPGA</b></div>
+      <div>STACK<b>Computer Arch.</b></div>
+      <div>
+<b>
+</b></div>
+    </div>
+  </figure>
+</article>
+
+<article class="topic" id="r03">
+  <div class="num">R / 03<small>Security Solutions<br/>for Applications</small></div>
+  <div class="body">
+    <h2>Development of Security Solutions<br/>for <em>Applications</em>.</h2>
+    <p class="lede">웹 브라우저 · 로봇 · 블록체인 · 머신러닝 프레임워크와 같이 일상에서 사용되는 다양한 어플리케이션의 고유한 특성을 고려한 보안 솔루션을 설계하고 개발합니다.</p>
+    <p>사용자에게 다양한 편의를 제공하기 위해, 우리가 일상적으로 사용하는 컴퓨팅 시스템에는 점차 다양한 어플리케이션들이 활용되고 있습니다. 예를 들어, 웹 브라우저, 로봇 어플리케이션, 블록체인 어플리케이션, 머신러닝 프레임워크 등을 들 수 있습니다. 본 연구실은 이러한 다양한 어플리케이션들이 가지는 고유의 특성을 고려하여, 어플리케이션의 보안성을 효과적으로 향상시킬 수 있는 보안 솔루션을 설계하고 개발하는 연구를 수행합니다.</p>
+    <div class="tags"><span class="tag">프로그래밍 방법론</span><span class="tag">코드 분석</span><span class="tag">ROS 2</span><span class="tag">Blockchain</span><span class="tag">ML</span></div>
+    <div class="pubs">
+      <h4>— Representative Publications</h4>
+      <ul>
+        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38189" target="_blank" rel="noopener"><b>TPMP</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38190" target="_blank" rel="noopener"><b>TCSC</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38189" target="_blank" rel="noopener"><b>ROS2-Monitor</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">T-ASE</span><a href="https://ieeexplore.ieee.org/document/10836890" target="_blank" rel="noopener"><b>ROSEC</b><span class="arr">↗</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <figure>
+    <div class="frame"><img src="assets/research/apps.jpg" alt="TPMP framework, TCST design overview, and ROS 2 attack-detection system"/></div>
+    <div class="meta">
+      <div>FOCUS<b>Application Sec.</b></div>
+      <div>PLATFORM<b>Wasm · ROS · Blockchain</b></div>
+      <div>STACK<b>Code Analysis</b></div>
+      <div>
+<b>
+</b></div>
+    </div>
+  </figure>
+</article>
+
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/chrome.js"></script>
+</body>
+</html>

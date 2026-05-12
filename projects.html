@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projects &amp; News · CSLab @ PNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<style>
+.proj-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:30px 0 60px}
+.proj{grid-column:span 6;background:#0A0A0A;color:#fff;border:1px solid #0A0A0A;border-radius:8px;padding:34px 32px 28px;display:flex;flex-direction:column;gap:16px;position:relative;min-height:280px}
+.proj .pmeta div{border-color:rgba(255,255,255,.15)}
+.proj .pmeta div b{color:#fff}
+.proj .ptag{background:rgba(255,255,255,.1);color:#fff;border-color:transparent}
+.proj h3{color:#fff}
+.proj h3 em{color:#9EB6FF;font-style:normal}
+.proj p{color:rgba(255,255,255,.72)}
+
+.past-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px 0 80px}
+.past{background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;font-family:var(--sans)}
+.past .ptop{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.past .pidx{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--accent)}
+.past .ptag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-strong);border-radius:3px;white-space:nowrap}
+.past h4{font-family:var(--sans);font-weight:600;font-size:14px;line-height:1.4;color:var(--ink);margin:4px 0 6px;letter-spacing:-.01em;text-wrap:pretty}
+.past .pmeta-s{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);line-height:1.55;letter-spacing:.02em;margin-top:auto;padding-top:10px;border-top:1px dashed var(--line)}
+.past .pmeta-s b{font-family:var(--sans);font-weight:500;color:var(--ink-2);letter-spacing:0}
+@media (max-width: 980px){
+  .proj{grid-column:span 12}
+  .past-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 640px){
+  .past-grid{grid-template-columns:1fr}
+}
+.proj .ptop{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.proj .pidx{font-family:var(--mono);font-size:11px;color:#9EB6FF;letter-spacing:.18em}
+.proj .pidx em{font-style:normal;color:rgba(255,255,255,.5)}
+.proj .ptag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;padding:5px 10px;border:1px solid rgba(255,255,255,.18);border-radius:4px;color:#fff;text-transform:uppercase;background:rgba(255,255,255,.08);white-space:nowrap}
+.proj h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;letter-spacing:-.02em;margin:8px 0 6px}
+.proj p{font-size:13.5px;line-height:1.65;margin:0;text-wrap:pretty}
+.proj .pmeta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 22px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
+.proj .pmeta div{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase;padding-right:8px}
+.proj .pmeta div b{display:block;font-family:var(--sans);font-weight:600;font-size:12.5px;color:#fff;text-transform:none;letter-spacing:0;margin-top:5px}
+.news-toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:24px;margin-bottom:6px;border-bottom:1px solid var(--ink)}
+.news-toolbar h2{font-family:var(--serif);font-weight:400;font-size:48px;margin:0;letter-spacing:-.02em}
+.news-toolbar h2 em{font-style:italic;color:var(--accent)}
+.filter{display:flex;gap:6px;flex-wrap:wrap}
+.filter button{font-family:var(--mono);font-size:11px;letter-spacing:.14em;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-2);cursor:pointer;text-transform:uppercase;transition:.2s}
+.filter button:hover{border-color:var(--ink)}
+.filter button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.timeline{padding:24px 0 80px}
+.year-band{display:grid;grid-template-columns:120px 1fr;gap:36px;padding:36px 0;border-top:1px solid var(--line)}
+.year-band .yr{font-family:var(--serif);font-style:italic;font-size:64px;line-height:1;color:var(--ink-3);position:sticky;top:96px;height:fit-content}
+.year-band .yr small{display:block;font-family:var(--mono);font-style:normal;font-size:11px;color:var(--ink-3);letter-spacing:.16em;margin-top:8px}
+</style>
+</head>
+<body id="top">
+<div id="site-header"></div>
+
+<header class="page-head" data-screen-label="01 Projects">
+  <div class="breadcrumb"><a href="index.html">CSLab</a><span class="sep">/</span><span>Projects</span></div>
+  <span class="eyebrow">— 04 / Active Projects</span>
+  <h1 class="page-title">Active <em>Projects.</em></h1>
+  <p class="page-lede">현재 수행 중인 정부 · 산업 과제 목록입니다. 최근 뉴스는 <a href="index.html#news" style="color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor">홈 News 섹션</a>을 참고하세요.</p>
+</header>
+
+<section class="section" data-screen-label="Active Projects" style="padding-top:30px">
+  <div class="sec-head">
+    <span class="sec-num">— 01 / Current</span>
+    <h2 class="sec-title">Current <em>Projects.</em></h2>
+    <p class="sec-aside">현재 수행 중인 4개 정부 · 산업 연구과제.</p>
+  </div>
+
+  <div class="proj-grid">
+    <article class="proj">
+      <div class="ptop"><span class="pidx">PJ / 14</span></div>
+      <h3>온디바이스 피지컬 AI를 위한 <em>신뢰실행환경 기반</em> 시스템 보안 연구</h3>
+      <div class="pmeta">
+        <div>FUNDING<b>한국연구재단</b></div>
+        <div>PROGRAM<b>개인기초연구 (과기정통부, R&amp;D)</b></div>
+        <div>PERIOD<b>2026.03 — 2029.02</b></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="ptop"><span class="pidx">PJ / 12</span></div>
+      <h3><em>제로트러스트 클라우드 보안</em> 신기술 연구 및 혁신인재 양성</h3>
+      <div class="pmeta">
+        <div>FUNDING<b>과학기술정보통신부</b></div>
+        <div>PROGRAM<b>대학 ICT 연구센터 육성지원사업</b></div>
+        <div>PERIOD<b>2023.07 — 2030.12</b></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="ptop"><span class="pidx">PJ / 13</span></div>
+      <h3>익명화된 <em>기밀실행</em>을 이용한 전주기적 데이터 프라이버시 보호 기술 개발</h3>
+      <div class="pmeta">
+        <div>FUNDING<b>과학기술정보통신부</b></div>
+        <div>PROGRAM<b>정보보호 핵심원천기술 개발사업</b></div>
+        <div>PERIOD<b>2024.06 — 2027.12</b></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="ptop"><span class="pidx">PJ / 03</span></div>
+      <h3><em>블록체인 기반</em> 및 플랫폼 분야 핵심기술 개발 및 미래 혁신인재 양성</h3>
+      <div class="pmeta">
+        <div>FUNDING<b>과학기술정보통신부</b></div>
+        <div>PROGRAM<b>대학 ICT 연구센터 육성지원사업</b></div>
+        <div>PERIOD<b>2020.07 — 2027.12</b></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" data-screen-label="Past Projects" style="padding-top:10px">
+  <div class="sec-head">
+    <span class="sec-num">— 02 / Past</span>
+    <h2 class="sec-title">Past <em>Projects.</em></h2>
+    <p class="sec-aside">완료된 11개 정부 · 산업 연구과제 (2020 — 2025).</p>
+  </div>
+
+  <div class="past-grid">
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 11</span></div>
+      <h4>프라이버시 친화적 재현데이터셋 생성 및 분산 분리학습 방안</h4>
+      <div class="pmeta-s">한국연구재단 · 집단연구지원사업<br/><b>2023.06 — 2026.02</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 10</span></div>
+      <h4>블록체인 기반 커피산업 특화 물류 플랫폼 구축</h4>
+      <div class="pmeta-s">과학기술정보통신부 · 연구개발특구육성사업<br/><b>2023.04 — 2025.12</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 09</span></div>
+      <h4>XMPP 프로토콜 취약성 분석 연구</h4>
+      <div class="pmeta-s">국가보안기술연구소 · 위탁연구<br/><b>2022.05 — 2022.11</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 08</span></div>
+      <h4>웹 어셈블리 취약성 분석연구</h4>
+      <div class="pmeta-s">국가보안기술연구소 · 위탁연구<br/><b>2023.04 — 2023.10</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 07</span></div>
+      <h4>블록체인 스마트 컨트랙트 취약점 탐지기술 연구</h4>
+      <div class="pmeta-s">한국전력연구원 · 위탁연구<br/><b>2022.02 — 2024.01</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 06</span></div>
+      <h4>임베디드 시스템 악성코드 탐지 · 복원을 위한 RISC-V 기반 보안 CPU 아키텍처 핵심 기술 개발</h4>
+      <div class="pmeta-s">과학기술정보통신부 · 정보보호 핵심원천기술 개발사업<br/><b>2021.04 — 2024.12</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 05</span></div>
+      <h4>사물 인터넷 기기를 대상으로 프로세서 아키텍처 기능을 활용한 시스템 보안 연구</h4>
+      <div class="pmeta-s">한국연구재단 · 생애첫연구과제<br/><b>2020.09 — 2023.02</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 04</span></div>
+      <h4>RISC-V CPU를 위한 Security Extension 설계 및 시뮬레이션 개발</h4>
+      <div class="pmeta-s">한국전자통신연구원 · 학술용역과제<br/><b>2020.07 — 2020.11</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 02</span></div>
+      <h4>융합보안 핵심인재 양성사업</h4>
+      <div class="pmeta-s">과학기술정보통신부 · 정보통신방송혁신인재양성사업<br/><b>2020.04 — 2025.12</b></div>
+    </article>
+
+    <article class="past">
+      <div class="ptop"><span class="pidx">PJ / 01</span></div>
+      <h4>스마트공장 네트워크 인프라용 보안 칩 및 실시간 제어프로토콜 보안 기술 개발</h4>
+      <div class="pmeta-s">과학기술정보통신부 · 정보보호 핵심원천기술 개발사업<br/><b>2020.03 — 2022.12</b></div>
+    </article>
+  </div>
+</section>
+
+
+<div id="site-footer"></div>
+<script src="assets/chrome.js"></script>
+</body>
+</html>

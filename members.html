@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Members · CSLab @ PNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<style>
+.prof{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start;padding:40px 0 80px;border-bottom:1px solid var(--line)}
+.prof .portrait{position:relative;aspect-ratio:4/5;background:var(--panel);overflow:hidden;border-radius:4px;max-width:50%}
+.prof .portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
+.prof .portrait .badge{position:absolute;top:14px;left:14px;background:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 10px;border-radius:4px}
+.prof h2{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1;margin:0 0 8px;letter-spacing:-.02em}
+.prof h2 em{font-style:italic;color:var(--accent)}
+.prof .title-en{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-bottom:24px}
+.prof .bio p{font-size:15px;line-height:1.7;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty}
+.prof .bio p strong{color:var(--ink)}
+.prof .kv{display:grid;grid-template-columns:120px 1fr;row-gap:10px;column-gap:24px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line);font-size:13px}
+.prof .kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.prof .kv dd{margin:0;color:var(--ink-2)}
+.prof .kv dd a{color:var(--accent);text-decoration:none}
+.role-band{display:flex;align-items:baseline;gap:24px;margin:80px 0 28px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
+.role-band .lbl{font-family:var(--serif);font-style:italic;font-size:32px}
+.role-band .cnt{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.16em}
+.member-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:18px}
+.mcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;text-decoration:none;color:inherit}
+.mcard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 28px -18px rgba(20,60,172,.4)}
+.mcard .ph{aspect-ratio:1/1.18;background:var(--panel);overflow:hidden;position:relative}
+.mcard .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1)}
+.mcard .num{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;color:#fff;mix-blend-mode:difference;letter-spacing:.14em}
+.mcard .info{padding:11px 11px 14px;display:flex;flex-direction:column;gap:4px}
+.mcard .nm{font-family:var(--serif);font-size:16px;line-height:1;letter-spacing:-.01em}
+.mcard .nm .en{display:block;font-family:var(--mono);font-size:8px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+.mcard .focus{font-size:10px;color:var(--ink-3);margin-top:5px;line-height:1.4}
+.alumni-list{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.alumni-list .row{display:grid;grid-template-columns:60px 1fr 1fr auto;gap:18px;padding:18px 0;border-top:1px solid var(--line);align-items:center;font-size:14px}
+.alumni-list .row:last-child{border-bottom:1px solid var(--line)}
+.alumni-list .yr{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
+.alumni-list .who{font-family:var(--serif);font-size:20px}
+.alumni-list .deg{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.alumni-list .now{color:var(--ink-2);font-size:13px}
+@media(max-width:1024px){.prof{grid-template-columns:1fr}.member-grid{grid-template-columns:repeat(4,1fr)}.alumni-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="top">
+<div id="site-header"></div>
+
+<header class="page-head" data-screen-label="01 Members">
+  <div class="breadcrumb"><a href="index.html">CSLab</a><span class="sep">/</span><span>Members</span></div>
+  <span class="eyebrow">— 02 / People &amp; Researchers</span>
+  <h1 class="page-title">Lab Members.</h1>
+  <p class="page-lede"></p>
+</header>
+
+<section class="section" id="professor" data-screen-label="Professor" style="padding-top:30px">
+  <div class="sec-head">
+    <span class="sec-num"></span>
+    <h2 class="sec-title"><em></em></h2>
+    <p class="sec-aside"></p>
+  </div>
+
+  <div class="prof">
+    <div class="prof-left" style="width: 500px">
+      <div class="title-en">Associate Professor</div>
+      <h2><em>DONGHYUN &nbsp;KWON</em></h2>
+      <div class="portrait">
+        <span class="badge">PI · 2020 — present</span>
+        <img src="assets/draft/professor.jpg" alt="Donghyun Kwon, Director of CSLab"/>
+      </div>
+      <dl class="kv">
+        <dt>Office</dt><dd>IT관(102동) 703호</dd>
+        <dt>Email</dt><dd><a href="mailto:kwondh@pusan.ac.kr">kwondh@pusan.ac.kr</a></dd>
+      </dl>
+    </div>
+    <div>
+      <div class="bio-embed" style="position:relative;width:100%;aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel)">
+        <iframe src="https://drive.google.com/file/d/1CzSE3oryV3hOGU8YftdGiev7iD39sBpU/preview" allow="autoplay" style="position:absolute;inset:0;width:100%;height:100%;border:0" title="권동현 교수 CV"></iframe>
+      </div>
+      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin-top:10px"><a href="https://drive.google.com/file/d/1CzSE3oryV3hOGU8YftdGiev7iD39sBpU/view" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">OPEN FULL CV ↗</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="researchers" data-screen-label="Researchers" style="padding-top:0">
+  <div class="sec-head">
+    <span class="sec-num"></span>
+    <h2 class="sec-title"></h2>
+    <p class="sec-aside"></p>
+  </div>
+
+  <div class="role-band"><span class="lbl">Ph.D. Candidates</span><span class="cnt">— 04 RESEARCHERS</span></div>
+  <div class="member-grid">
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 01</span><img src="assets/researchers/박성환.jpg" alt="박성환"/></div><div class="info"><div class="nm">박성환<span class="en">SUNGHWAN &nbsp;PARK</span></div><div class="focus">RISC-V · 메모리 격리 · ISA 확장 설계</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 02</span><img src="assets/researchers/강정환.jpg" alt="강정환"/></div><div class="info"><div class="nm">강정환<span class="en">JEONGHWAN &nbsp;KANG</span></div><div class="focus">임베디드 메모리 보안 · 컴파일러</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 03</span><img src="assets/researchers/송수현.jpg" alt="송수현"/></div><div class="info"><div class="nm">송수현<span class="en">SUHYEON &nbsp;SONG</span></div><div class="focus">TrustZone · WebAssembly 보안</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 04</span><img src="assets/researchers/박재열.jpg" alt="박재열"/></div><div class="info"><div class="nm">박재열<span class="en">JAEYEOL &nbsp;PARK</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
+  </div>
+
+  <div class="role-band"><span class="lbl">M.S. Students</span><span class="cnt">— 02 RESEARCHERS</span></div>
+  <div class="member-grid">
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 05</span><img src="assets/researchers/신채원.jpg" alt="신채원"/></div><div class="info"><div class="nm">신채원<span class="en">CHAEWON &nbsp;SHIN</span></div><div class="focus">TrustZone · WebAssembly 보안</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 06</span><img src="assets/researchers/구윤주.jpg" alt="구윤주"/></div><div class="info"><div class="nm">구윤주<span class="en">YUNJU &nbsp;KOO</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
+  </div>
+
+  <div class="role-band"><span class="lbl">Undergraduate Researchers</span><span class="cnt">— 07 RESEARCHERS</span></div>
+  <div class="member-grid">
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 07</span><img src="assets/researchers/김경환.jpg" alt="김경환"/></div><div class="info"><div class="nm">김경환<span class="en">KYUNGHWAN &nbsp;KIM</span></div><div class="focus">임베디드 메모리 보안 · 컴파일러</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 09</span><img src="assets/researchers/전동훈.jpg" alt="전동훈"/></div><div class="info"><div class="nm">전동훈<span class="en">DONGHOON &nbsp;JEON</span></div><div class="focus">학부 인턴</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 10</span><img src="assets/researchers/홍지연.jpg" alt="홍지연"/></div><div class="info"><div class="nm">홍지연<span class="en">JIYEON &nbsp;HONG</span></div><div class="focus">학부 인턴</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 11</span><img src="assets/researchers/김지민.jpg" alt="김지민"/></div><div class="info"><div class="nm">김지민<span class="en">JIMIN &nbsp;KIM</span></div><div class="focus">학부 인턴</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 12</span><img src="assets/researchers/김강건.jpg" alt="김강건"/></div><div class="info"><div class="nm">김강건<span class="en">GANGKEON &nbsp;KIM</span></div><div class="focus">학부 인턴</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 13</span><img src="assets/researchers/이도영.jpg" alt="이도영"/></div><div class="info"><div class="nm">이도영<span class="en">DOYOUNG &nbsp;LEE</span></div><div class="focus">학부 인턴</div></div></a>
+  </div>
+
+  <div class="role-band"><span class="lbl">Alumni</span><span class="cnt">— 졸업생</span></div>
+  <div class="alumni-list">
+    <div class="row"><span class="yr">2026.02</span><span class="who">강하영</span><span class="deg">M.S.</span><span class="now">한국전자통신연구원 (ETRI)</span></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/chrome.js"></script>
+</body>
+</html>
