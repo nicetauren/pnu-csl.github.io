@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Photos · CSLab @ PNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<style>
+.year-section{margin-bottom:110px}
+.year-section:last-child{margin-bottom:60px}
+.year-header{display:flex;align-items:flex-end;gap:32px;border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:40px}
+.year-num{font-family:var(--serif);font-size:76px;line-height:.85;font-weight:300;letter-spacing:-.035em;color:var(--ink);font-style:italic}
+.year-label{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.18em;text-transform:uppercase;padding-bottom:14px}
+.year-count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.16em;text-transform:uppercase;padding-bottom:14px}
+.year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 26px}
+.photo-card{display:flex;flex-direction:column}
+.photo-card figure{margin:0;display:flex;flex-direction:column;height:100%}
+.photo-card .img{overflow:hidden;background:var(--panel);border-radius:2px}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.photo-card:hover img{transform:scale(1.025)}
+.photo-card figcaption{font-family:var(--sans);font-size:13px;color:var(--ink-2);margin-top:14px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.photo-card figcaption .date{font-family:var(--mono);font-size:11.5px;color:#888;letter-spacing:.08em;white-space:nowrap}
+.photo-card figcaption .place{color:var(--ink);font-weight:500}
+.col-12{grid-column:span 1}.col-12 .img{aspect-ratio:4/3}
+.col-7{grid-column:span 1}.col-7 .img{aspect-ratio:4/3}
+.col-5{grid-column:span 1}.col-5 .img{aspect-ratio:4/3}
+@media(max-width:900px){
+  .year-grid{grid-template-columns:repeat(2,1fr);gap:22px}
+  .col-12,.col-7,.col-5{grid-column:span 1}
+  .col-12 .img,.col-7 .img,.col-5 .img{aspect-ratio:4/3}
+  .year-num{font-size:48px}
+}
+</style>
+</head>
+<body id="top">
+<div id="site-header"></div>
+
+<header class="page-head" data-screen-label="01 Photos">
+  <div class="breadcrumb"><a href="index.html">CSLab</a><span class="sep">/</span><span>Photos</span></div>
+  <span class="eyebrow">— 06 / Lab Life</span>
+  <h1 class="page-title">Photos.<em></em></h1>
+  <p class="page-lede"></p>
+</header>
+
+<section class="section" style="padding-top:30px">
+
+  <div class="year-section">
+    <div class="year-header">
+      <div class="year-num">2026</div>
+      <div class="year-label">— 학술대회</div>
+      <div class="year-count">02 photos</div>
+    </div>
+    <div class="year-grid">
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2026.05.11 - 부산 벡스코.jpg" alt=""/></div><figcaption><span class="date">2026.05.11.</span><span class="place">부산 · 벡스코 — CISC-S'26 한국정보보호학회 하계학술대회</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2026.01.22 - 부산.jpg" alt=""/></div><figcaption><span class="date">2026.01.22.</span><span class="place">부산</span></figcaption></figure>
+    </div>
+  </div>
+
+  <div class="year-section">
+    <div class="year-header">
+      <div class="year-num">2025</div>
+      <div class="year-label">— 출장 · MT · 학회</div>
+      <div class="year-count">04 photos</div>
+    </div>
+    <div class="year-grid">
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2025.12.09. - 호놀룰루.jpg" alt=""/></div><figcaption><span class="date">2025.12.09.</span><span class="place">호놀룰루</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2025.10.31 - 거제.jpg" alt=""/></div><figcaption><span class="date">2025.10.31.</span><span class="place">거제</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2025.07.31 - 부산.jpg" alt=""/></div><figcaption><span class="date">2025.07.31.</span><span class="place">부산 · 사직야구장</span></figcaption></figure>
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2025.04.04. - 부산.jpg" alt=""/></div><figcaption><span class="date">2025.04.04.</span><span class="place">부산</span></figcaption></figure>
+    </div>
+  </div>
+
+  <div class="year-section">
+    <div class="year-header">
+      <div class="year-num">2024</div>
+      <div class="year-label">— 학회 · 일상</div>
+      <div class="year-count">03 photos</div>
+    </div>
+    <div class="year-grid">
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2024.10.31 - 서울.jpg" alt=""/></div><figcaption><span class="date">2024.10.31.</span><span class="place">서울 — ACK 2024</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2024.06.26. - 샌프란시스코.jpg" alt=""/></div><figcaption><span class="date">2024.06.26.</span><span class="place">샌프란시스코 — DAC 2024</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2024.03.29 - 부산.jpg" alt=""/></div><figcaption><span class="date">2024.03.29.</span><span class="place">부산</span></figcaption></figure>
+    </div>
+  </div>
+
+  <div class="year-section">
+    <div class="year-header">
+      <div class="year-num">2023</div>
+      <div class="year-label">— 봄 · 출장</div>
+      <div class="year-count">02 photos</div>
+    </div>
+    <div class="year-grid">
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2023.05.19 - 서울.jpg" alt=""/></div><figcaption><span class="date">2023.05.19.</span><span class="place">서울</span></figcaption></figure>
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2023.03.13 - 부산.jpg" alt=""/></div><figcaption><span class="date">2023.03.13.</span><span class="place">부산 · 벚꽃길</span></figcaption></figure>
+    </div>
+  </div>
+
+  <div class="year-section">
+    <div class="year-header">
+      <div class="year-num">2022</div>
+      <div class="year-label">— 학회 · MT</div>
+      <div class="year-count">04 photos</div>
+    </div>
+    <div class="year-grid">
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2022.12.21 - 제주.jpg" alt=""/></div><figcaption><span class="date">2022.12.21.</span><span class="place">제주 — KSC 2022</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2022.11.06 - 로스앤젤레스.jpg" alt=""/></div><figcaption><span class="date">2022.11.06.</span><span class="place">로스앤젤레스 — ACM CCS 2022</span></figcaption></figure>
+      <figure class="photo-card col-5"><div class="img"><img src="assets/draft/2022.07.01 - 거제.jpg" alt=""/></div><figcaption><span class="date">2022.07.01.</span><span class="place">거제</span></figcaption></figure>
+      <figure class="photo-card col-7"><div class="img"><img src="assets/draft/2022.04.01 - 부산.jpg" alt=""/></div><figcaption><span class="date">2022.04.01.</span><span class="place">부산</span></figcaption></figure>
+    </div>
+  </div>
+
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/chrome.js"></script>
+</body>
+</html>

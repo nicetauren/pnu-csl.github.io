@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSLab @ PNU — 컴퓨터 보안 연구실</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --bg:#FBFCFE;
+    --bg-2:#F1F4FB;
+    --panel:#F6F8FD;
+    --line:rgba(20,40,90,.10);
+    --line-strong:rgba(20,40,90,.20);
+    --ink:#0B1023;
+    --ink-2:#3E465F;
+    --ink-3:#7A839F;
+    --blue:#2E6CFF;
+    --blue-2:#1F4DFF;
+    --blue-glow:#1F4DFF;
+    --cyan:#3D74C9;
+    --warn:#D97706;
+    --serif:"Instrument Serif", "Noto Serif KR", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+    --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --sans:"Pretendard", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv11"}
+  body{
+    background:
+      radial-gradient(1200px 700px at 78% -10%, rgba(46,108,255,.10), transparent 60%),
+      radial-gradient(900px 600px at -10% 30%, rgba(46,108,255,.06), transparent 60%),
+      var(--bg);
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  /* Subtle grid backdrop */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(140,170,255,.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(20,40,90,.05) 1px, transparent 1px);
+    background-size:80px 80px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 80%);
+  }
+  /* Grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 36px;
+    backdrop-filter:blur(14px);
+    background:linear-gradient(to bottom, rgba(251,252,254,.92), rgba(251,252,254,.6));
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .brand .mark{width:40px;height:40px;display:grid;place-items:center;position:relative}
+  .brand .mark img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 8px rgba(46,108,255,.7))}
+  .brand .name{display:flex;flex-direction:column;line-height:1}
+  .brand .name b{font-family:var(--serif);font-weight:400;font-size:28px;letter-spacing:.2px}
+  .brand .name span{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+  .nav{display:flex;gap:2px;align-items:center}
+  .nav a{
+    color:var(--ink-2);text-decoration:none;font-size:13px;letter-spacing:.02em;
+    padding:8px 14px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:6px;transition:color .2s, background .2s;
+  }
+  .nav a:hover{color:var(--ink);background:rgba(20,40,90,.05)}
+  .nav a .num{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+  .nav a.active{color:var(--ink)}
+  .nav a.active .num{color:var(--blue-2)}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .pill{
+    font-family:var(--mono);font-size:11px;color:var(--cyan);
+    border:1px solid var(--line-strong);padding:6px 10px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:#3DDC97;box-shadow:0 0 10px #3DDC97}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;z-index:2;
+    min-height:100vh;
+    padding:140px 36px 80px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+    max-width:1440px;margin:0 auto;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue-2)}
+  h1.title{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(56px, 7.5vw, 120px);
+    line-height:.95;letter-spacing:-.02em;margin:22px 0 0;
+  }
+  h1.title em{font-style:italic;color:var(--blue-2);text-shadow:0 0 40px rgba(46,108,255,.5);text-decoration:none}
+  .lede{
+    margin-top:36px;max-width:560px;font-size:17px;line-height:1.65;color:var(--ink-2);
+    text-wrap:pretty;
+  }
+  .meta-row{
+    margin-top:48px;display:flex;gap:36px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:24px;max-width:560px;
+  }
+  .meta-row .cell{font-family:var(--mono);font-size:11px}
+  .meta-row .cell .k{color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;display:block;margin-bottom:8px}
+  .meta-row .cell .v{color:var(--ink);font-size:14px}
+  .cta-row{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 22px;border-radius:8px;
+    font-size:14px;letter-spacing:.02em;text-decoration:none;cursor:pointer;
+    border:1px solid transparent;font-family:var(--sans);font-weight:500;
+    transition:transform .15s, box-shadow .2s, background .2s;
+  }
+  .btn.primary{background:var(--blue);color:white;box-shadow:0 0 0 1px rgba(46,108,255,.15), 0 16px 50px -16px rgba(46,108,255,.6)}
+  .btn.primary:hover{background:var(--blue-2);transform:translateY(-1px)}
+  .btn.ghost{color:var(--ink);border-color:var(--line-strong);background:rgba(20,40,90,.02)}
+  .btn.ghost:hover{background:rgba(46,108,255,.06)}
+  .btn .arr{display:inline-block;transition:transform .2s}
+  .btn:hover .arr{transform:translateX(3px)}
+
+  /* Logo art */
+  .hero-art{
+    position:relative;display:grid;place-items:center;
+    aspect-ratio:1/1;min-height:420px;
+  }
+  .ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--line);}
+  .ring.r2{inset:8%;border-color:var(--line-strong)}
+  .ring.r3{inset:18%;border:1px dashed rgba(20,40,90,.20)}
+  .ring.r4{inset:30%;border-color:rgba(46,108,255,.35)}
+  .ring.spin{animation:spin 60s linear infinite}
+  .ring.spin-rev{animation:spin 90s linear infinite reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ring .tick{
+    position:absolute;left:50%;top:-1px;transform-origin:0 50%;
+    font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.2em;
+    transform:translate(-50%,-50%);
+  }
+  .logo-wrap{
+    position:relative;width:62%;aspect-ratio:1/1;
+    display:grid;place-items:center;
+  }
+  .logo-glow{
+    position:absolute;inset:-20%;
+    background:radial-gradient(circle, rgba(46,108,255,.55), rgba(46,108,255,0) 60%);
+    filter:blur(20px);
+    animation:pulse 4.5s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+  .logo-wrap img{width:78%;height:78%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 0 30px rgba(46,108,255,.7))}
+  .corner{position:absolute;font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.2em;text-transform:uppercase}
+  .corner.tl{top:0;left:0}
+  .corner.tr{top:0;right:0;text-align:right}
+  .corner.bl{bottom:0;left:0}
+  .corner.br{bottom:0;right:0;text-align:right}
+  .corner b{display:block;color:var(--blue-2);font-weight:500;font-family:var(--mono);font-size:11px;margin-top:4px}
+
+  /* Scrolling marquee */
+  .ticker{
+    position:relative;z-index:2;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:rgba(241,244,251,.85);overflow:hidden;
+  }
+  .ticker .lane{display:flex;gap:60px;padding:14px 0;white-space:nowrap;animation:scroll 50s linear infinite;width:max-content}
+  .ticker span{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.06em}
+  .ticker span b{color:var(--blue-2);font-weight:500;margin-right:8px}
+  .ticker span .star{color:var(--warn)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Section frame */
+  .section{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:120px 36px;}
+  .sec-head{display:grid;grid-template-columns:160px 1fr auto;gap:32px;align-items:end;margin-bottom:56px}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--blue-2);letter-spacing:.2em}
+  .sec-title{
+    font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,72px);
+    line-height:1;letter-spacing:-.015em;margin:0;
+  }
+  .sec-title em{font-style:italic;color:var(--ink-2)}
+  .sec-aside{font-size:13px;color:var(--ink-3);max-width:280px;text-align:right;line-height:1.5}
+
+  /* About */
+  .about{display:grid;grid-template-columns:160px 1.4fr 1fr;gap:48px;align-items:start}
+  .about .label{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.2em;text-transform:uppercase;padding-top:6px}
+  .about .body p{font-size:18px;line-height:1.7;color:var(--ink-2);margin:0 0 18px;text-wrap:pretty}
+  .about .body p strong{color:var(--ink);font-weight:500}
+  .about .stats{display:flex;flex-direction:column;gap:1px;background:var(--line)}
+  .about .stats .stat{background:var(--bg);padding:22px 24px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+  .about .stats .num{font-family:var(--serif);font-size:48px;color:var(--blue-2);line-height:1}
+  .about .stats .lab{font-family:var(--mono);font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.16em;text-align:right}
+
+  /* Research grid */
+  .research{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .rcard{background:var(--bg);padding:36px 32px;position:relative;overflow:hidden;cursor:pointer;transition:background .3s}
+  .rcard:hover{background:rgba(46,108,255,.04)}
+  .rcard.size-a{grid-column:span 6}
+  .rcard.size-b{grid-column:span 4}
+  .rcard.size-c{grid-column:span 8}
+  .rcard.size-d{grid-column:span 5}
+  .rcard.size-e{grid-column:span 7}
+  .rcard.size-f{grid-column:span 12}
+  .rcard .idx{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.2em;display:flex;justify-content:space-between;align-items:center}
+  .rcard h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-.01em;margin:50px 0 16px;color:var(--ink)}
+  .rcard h3 em{font-style:italic;color:var(--blue-2)}
+  .rcard p{font-size:14px;line-height:1.7;color:var(--ink-2);margin:0;max-width:60ch}
+  .rcard .pubs{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11px;color:var(--ink-3);line-height:1.7;letter-spacing:.02em}
+  .rcard .pubs b{color:var(--blue-2);font-weight:500;letter-spacing:.05em}
+  .rcard .tags{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px}
+  .rcard .tag{font-family:var(--mono);font-size:10px;color:var(--ink-3);border:1px solid var(--line);padding:4px 10px;border-radius:999px;letter-spacing:.1em;text-transform:uppercase}
+  .rcard:hover .tag{border-color:var(--line-strong);color:var(--ink-2)}
+  .rcard .glyph{position:absolute;right:-40px;top:-40px;width:200px;height:200px;opacity:.12;pointer-events:none;transition:opacity .3s, transform .5s}
+  .rcard:hover .glyph{opacity:.35;transform:scale(1.05) rotate(8deg)}
+  .rcard .glyph svg{width:100%;height:100%}
+
+  /* News/Notice list */
+  .news-block{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .news-list{display:flex;flex-direction:column}
+  .news-row{
+    display:grid;grid-template-columns:80px 100px 1fr auto;gap:24px;align-items:center;
+    padding:22px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);
+    transition:padding .25s, color .2s;
+  }
+  .news-row:last-child{border-bottom:1px solid var(--line)}
+  .news-row:hover{padding-left:8px;color:var(--blue-2)}
+  .news-row .date{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+  .news-row .badge{
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    padding:4px 10px;border-radius:4px;justify-self:start;
+    border:1px solid var(--line-strong);color:var(--ink-2);
+  }
+  .news-row .badge.notice{background:rgba(46,108,255,.1);color:var(--blue-2);border-color:rgba(46,108,255,.3)}
+  .news-row .badge.paper{background:rgba(63,220,151,.08);color:#3DDC97;border-color:rgba(63,220,151,.3)}
+  .news-row .badge.award{background:rgba(255,179,71,.08);color:var(--warn);border-color:rgba(255,179,71,.3)}
+  .news-row .title{font-size:16px;line-height:1.4}
+  .news-row .arr{color:var(--ink-3);font-family:var(--mono);font-size:14px}
+  .news-row:hover .arr{color:var(--blue-2)}
+
+  /* Featured highlight */
+  .feature{
+    border:1px solid var(--line-strong);
+    background:linear-gradient(180deg, rgba(46,108,255,.10), rgba(46,108,255,0) 60%), var(--panel);
+    padding:36px;border-radius:8px;position:relative;overflow:hidden;
+  }
+  .feature::before{
+    content:"";position:absolute;top:-30%;right:-20%;width:340px;height:340px;
+    background:radial-gradient(circle, rgba(46,108,255,.45), transparent 60%);filter:blur(40px);
+  }
+  .feature .ftag{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase}
+  .feature h4{font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.1;margin:14px 0 14px;letter-spacing:-.01em;position:relative}
+  .feature p{font-size:15px;color:var(--ink-2);line-height:1.65;margin:0 0 24px;position:relative;max-width:46ch}
+  .feature .meta{display:flex;gap:24px;font-family:var(--mono);font-size:11px;color:var(--ink-3);position:relative;border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
+  .feature .meta b{color:var(--ink);font-weight:500;display:block;margin-top:4px;font-family:var(--sans);font-size:13px}
+
+  /* Members preview */
+  .members-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .mcard{background:var(--bg);padding:28px 22px;display:flex;flex-direction:column;gap:6px;transition:background .2s}
+  .mcard:hover{background:rgba(46,108,255,.04)}
+  .mcard .avatar{
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(135deg, rgba(46,108,255,.4), rgba(46,108,255,.05));
+    border:1px solid var(--line-strong);
+    display:grid;place-items:center;font-family:var(--mono);color:var(--blue-2);font-size:18px;font-weight:500;
+    margin-bottom:14px;
+  }
+  .mcard .nm{font-family:var(--serif);font-size:22px;letter-spacing:-.005em}
+  .mcard .role{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.16em;text-transform:uppercase}
+  .mcard .focus{font-size:12px;color:var(--ink-2);margin-top:10px;line-height:1.5}
+
+  /* Contact */
+  .contact-block{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end}
+  .big-q{font-family:var(--serif);font-size:clamp(48px,6.5vw,96px);line-height:.95;letter-spacing:-.02em;margin:0}
+  .big-q em{font-style:italic;color:var(--blue-2)}
+  .contact-info{font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1.9}
+  .contact-info .row{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+  .contact-info .row:last-child{border-bottom:1px solid var(--line)}
+  .contact-info .k{color:var(--ink-3);letter-spacing:.18em;text-transform:uppercase;font-size:11px}
+  .contact-info a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border .2s}
+  .contact-info a:hover{border-color:var(--blue-2);color:var(--blue-2)}
+
+  /* Footer */
+  footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:60px 36px 40px;margin-top:60px}
+  footer .row{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+  footer .row a{color:var(--ink-2);text-decoration:none}
+  footer .row a:hover{color:var(--blue-2)}
+
+  /* Recruiting banner */
+  .recruit{
+    position:relative;z-index:3;
+    margin:0 auto;max-width:1440px;
+    padding:0 36px;
+  }
+  .recruit-inner{
+    color:#fff;
+    background:linear-gradient(110deg, #0B1023 0%, #102050 60%, #1F4DFF 130%);
+    border:1px solid rgba(91,139,255,.5);
+    border-radius:14px;padding:28px 36px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+    box-shadow:0 30px 80px -30px rgba(46,108,255,.5);
+    position:relative;overflow:hidden;
+  }
+  .recruit-inner::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 90% 50%, rgba(255,255,255,.18), transparent 50%);
+  }
+  .recruit-inner .l{display:flex;align-items:center;gap:18px;position:relative}
+  .recruit-inner .badge2{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.12);padding:6px 12px;border-radius:6px}
+  .recruit-inner h5{font-family:var(--serif);font-size:26px;margin:0;font-weight:400}
+  .recruit-inner h5 em{font-style:italic;color:#A8C4FF}
+  .recruit-inner .sub{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.7);margin-top:4px;letter-spacing:.08em}
+  .recruit-inner a{font-family:var(--sans);text-decoration:none;color:#0B1023;background:white;padding:12px 20px;border-radius:8px;font-weight:500;font-size:13px;display:inline-flex;align-items:center;gap:8px;position:relative}
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .hero{grid-template-columns:1fr;gap:40px;padding-top:120px}
+    .hero-art{order:-1;min-height:320px}
+    .about{grid-template-columns:1fr}
+    .news-block,.contact-block{grid-template-columns:1fr;gap:40px}
+    .research .rcard{grid-column:span 12!important}
+    .nav{display:none}
+    .sec-head{grid-template-columns:1fr;gap:12px}
+    .sec-aside{text-align:left;max-width:none}
+  }
+  @media (max-width:600px){
+    .topbar{padding:14px 18px}
+    .section{padding:80px 18px}
+    .hero{padding:100px 18px 40px}
+    .recruit{padding:0 18px}
+    .recruit-inner{padding:22px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar" data-screen-label="Header">
+  <a class="brand" href="#top">
+    <span class="mark"><img src="assets/trans.png" alt="" /></span>
+    <span class="name"><b>CSLab</b><span>PNU · Computer Security</span></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#top" class="active"><span class="num">01</span> Home</a>
+    <a href="#members"><span class="num">02</span> Members</a>
+    <a href="#research"><span class="num">03</span> Research</a>
+    <a href="#projects"><span class="num">04</span> Projects</a>
+    <a href="#publications"><span class="num">05</span> Publications</a>
+    <a href="#photos"><span class="num">06</span> Photos</a>
+  </nav>
+  <div class="right">
+    <span class="pill"><span class="dot"></span> 2026 모집 중</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="hero-text">
+    <span class="eyebrow">부산대학교 · Est. 2020</span>
+    <h1 class="title">Computer<br/><em>Security</em><br/>Laboratory.</h1>
+    <p class="lede">
+      본 연구실에서는 <strong>컴퓨팅 시스템에 존재하는 다양한 위협</strong>으로부터 시스템을 보호하기 위한 보안 연구를 진행 중에 있습니다.<br/>
+      이를 위해 <strong>컴퓨터 아키텍처</strong>, <strong>컴파일러</strong>, <strong>운영체제</strong> 등 전통적인 컴퓨터 공학 지식 뿐만 아니라 웹, 블록체인, 딥러닝, 로봇, 사물인터넷 기술과 같은 최신 컴퓨터 공학 기술에 대한 이해를 바탕으로 연구를 진행하고 있습니다.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#recruit">
+        2026 신규 연구원 모집 <span class="arr">→</span>
+      </a>
+      <a class="btn ghost" href="#research">
+        연구 분야 살펴보기
+      </a>
+    </div>
+    <div class="meta-row">
+      <div class="cell"><span class="k">Location</span><span class="v">대한민국 부산광역시</span></div>
+      <div class="cell"><span class="k">Director</span><span class="v">정보컴퓨터공학부 지도교수</span></div>
+      <div class="cell"><span class="k">Headcount</span><span class="v">박사 4 · 석사 2 · 학부 7명</span></div>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <span class="corner tl">SYS / 01<b>NODE.PNU</b></span>
+    <span class="corner tr">LAT 35.2331°<b>LON 129.0790°</b></span>
+    <span class="corner bl">BUILD<b>v.2026.04</b></span>
+    <span class="corner br">UPTIME<b>4 215d</b></span>
+    <div class="ring spin">
+      <span class="tick" style="transform:rotate(0deg) translate(-50%,-50%)">N · 000</span>
+      <span class="tick" style="transform:rotate(90deg) translate(-50%,-50%)">E · 090</span>
+      <span class="tick" style="transform:rotate(180deg) translate(-50%,-50%)">S · 180</span>
+      <span class="tick" style="transform:rotate(270deg) translate(-50%,-50%)">W · 270</span>
+    </div>
+    <div class="ring r2 spin-rev"></div>
+    <div class="ring r3"></div>
+    <div class="ring r4"></div>
+    <div class="logo-wrap">
+      <div class="logo-glow"></div>
+      <img src="assets/trans.png" alt="CSLab logo" style="padding: 0px; object-fit: scale-down; opacity: 0.8" />
+    </div>
+  </div>
+</section>
+
+<!-- RECRUITING -->
+<div class="recruit" id="recruit">
+  <div class="recruit-inner">
+    <div class="l">
+      <span class="badge2">모집 중</span>
+      <div>
+        <h5>2026 <em>대학원 · 학부</em> 연구원 모집</h5>
+        <div class="sub">석사 / 박사 / 학부 인턴 · 상시 지원, 2026.06.30 마감</div>
+      </div>
+    </div>
+    <a href="#contact">자세히 보기 →</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="lane">
+    <span><b>ACSAC '25</b> SMORE · ELK 2편 채택</span>
+    <span class="star">★</span>
+    <span><b>특허 등록</b> 스마트 컨트랙트 CFI 보장 방법</span>
+    <span class="star">★</span>
+    <span><b>한국연구재단</b> 우수신진연구 과제 수주</span>
+    <span class="star">★</span>
+    <span><b>BK21</b> 강정환 최우수상 · 신채원 우수상</span>
+    <span class="star">★</span>
+    <span><b>SCIE</b> 저널 4편 게재 (TzPy · SERA · WARD · Beyond Address Spaces)</span>
+    <span class="star">★</span>
+    <span><b>ACSAC '25 CTF</b> 김경환 2nd Place</span>
+    <span class="star">★</span>
+    <!-- duplicate -->
+    <span><b>ACSAC '25</b> SMORE · ELK 2편 채택</span>
+    <span class="star">★</span>
+    <span><b>특허 등록</b> 스마트 컨트랙트 CFI 보장 방법</span>
+    <span class="star">★</span>
+    <span><b>한국연구재단</b> 우수신진연구 과제 수주</span>
+    <span class="star">★</span>
+    <span><b>BK21</b> 강정환 최우수상 · 신채원 우수상</span>
+    <span class="star">★</span>
+    <span><b>SCIE</b> 저널 4편 게재 (TzPy · SERA · WARD · Beyond Address Spaces)</span>
+    <span class="star">★</span>
+    <span><b>ACSAC '25 CTF</b> 김경환 2nd Place</span>
+    <span class="star">★</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about" data-screen-label="02 About">
+  <div class="sec-head">
+    <span class="sec-num">— 01 / About</span>
+    <h2 class="sec-title"><em>About CSLAB</em></h2>
+    <p class="sec-aside">2020년 설립. 부산대학교 정보컴퓨터공학부 소속.</p>
+  </div>
+
+  <div class="about">
+    <div class="label">Mission</div>
+    <div class="body">
+      <p>CSLab은 <strong>신뢰할 수 있는 컴퓨팅의 기반</strong>을 연구합니다. 보안을 경험적 과학으로 다루며, 실제 시스템에서 실제 버그를 찾는 도구를 만들고 그 결과를 실전 방어 기술로 발전시킵니다. 특히 최근에는 임베디드 시스템, RISC-V 아키텍처, WebAssembly, 그리고 로봇 운영체제(ROS 2) 등 다양한 도메인에서의 메모리 안전성과 신뢰 실행 환경(TEE) 보안 연구에 집중하고 있습니다.</p>
+      <p>학생들은 <strong>USENIX Security</strong>, <strong>NDSS</strong>, <strong>DAC</strong>, <strong>ACSAC</strong>, <strong>ICCAD</strong>, <strong>DATE</strong>, <strong>AsiaCCS</strong>와 같은 BK21 IF:2–3 등급의 최상위 학술대회에서 꾸준히 논문을 발표하고 있으며, <strong>IEEE TIFS</strong>·<strong>IEEE T-ASE</strong>·<strong>IEEE TMC</strong>·<strong>Computers &amp; Security</strong> 등 SCIE Q1 저널을 통해 연구 결과를 게재하고 있습니다. 또한 <strong>국내외 특허 24건</strong>을 출원·등록하며 기술 이전 가능한 형태로의 연구 성과를 축적해오고 있습니다.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="num">24</span><span class="lab">International<br/>publications</span></div>
+      <div class="stat"><span class="num">59</span><span class="lab">Domestic<br/>publications</span></div>
+      <div class="stat"><span class="num">24</span><span class="lab">Patents<br/>filed / granted</span></div>
+      <div class="stat"><span class="num">06</span><span class="lab">Years of<br/>operation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research" data-screen-label="03 Research">
+  <div class="sec-head">
+    <span class="sec-num">— 02 / Research</span>
+    <h2 class="sec-title"><em>Research Topics</em><br/>and Publication.</h2>
+    <p class="sec-aside">메모리 안전성 · 아키텍처 보안 기능 · 신뢰 실행 환경 · 응용 보안.</p>
+  </div>
+
+  <div class="research">
+
+    <article class="rcard size-c">
+      <div class="idx"><span>R / 01</span><span>active</span></div>
+      <h3>Embedded &amp; <em>Memory Safety</em>.</h3>
+      <p>임베디드 및 범용 시스템의 공간·시간 메모리 안전성 보장 — ARMv8-M, MTE, Pointer Authentication과 같은 하드웨어 기능과 컴파일러 계측을 결합한 효율적 방어 기법을 설계합니다. 힙·스택·execute-only 메모리 등 다양한 메모리 영역에 대한 보호 메커니즘을 폭넓게 다룹니다.</p>
+      <div class="tags"><span class="tag">ARMv8-M</span><span class="tag">MTE</span><span class="tag">Memory Tagging</span><span class="tag">Compiler</span></div>
+      <div class="pubs"><b>대표 연구</b> &nbsp; uXOM [USENIX Security '19] · ELK · SMORE [ACSAC '25] · Look Before You Access [DAC '24] · ZOMETAG [TIFS '23] · CRCount [NDSS '19]</div>
+      <div class="glyph">
+        <svg viewBox="0 0 200 200"><g fill="none" stroke="#5B8BFF" stroke-width="1.2"><rect x="30" y="30" width="140" height="140"/><rect x="55" y="55" width="90" height="90"/><rect x="80" y="80" width="40" height="40" fill="#2E6CFF" fill-opacity=".4" stroke="none"/><path d="M30 30 L80 80 M170 30 L120 80 M30 170 L80 120 M170 170 L120 120"/></g></svg>
+      </div>
+    </article>
+
+    <article class="rcard size-b">
+      <div class="idx"><span>R / 02</span><span>active</span></div>
+      <h3>Architectural Supports for <em>Security</em>.</h3>
+      <p>RISC-V Open ISA를 활용해 보안 기능을 직접 설계하고, 이를 기반으로 한 보안 솔루션까지 개발합니다. 명령어 수준의 메모리 격리, 분기 태그 확장, 커널 무결성 보장을 위한 하드웨어 플랫폼을 폭넓게 탐구합니다.</p>
+      <div class="tags"><span class="tag">RISC-V</span><span class="tag">ISA Extension</span><span class="tag">Hardware</span></div>
+      <div class="pubs"><b>대표 연구</b> &nbsp; RIMI [ICCAD '20] · RiskiM [DATE '19] · Bratter · CoMeT</div>
+      <div class="glyph">
+        <svg viewBox="0 0 200 200"><g fill="none" stroke="#5B8BFF" stroke-width="1.2"><circle cx="100" cy="100" r="78"/><circle cx="100" cy="100" r="50"/><circle cx="100" cy="100" r="22" fill="#2E6CFF" fill-opacity=".4" stroke="none"/><path d="M22 100 L178 100 M100 22 L100 178"/></g></svg>
+      </div>
+    </article>
+
+    <article class="rcard size-b">
+      <div class="idx"><span>R / 03</span><span>active</span></div>
+      <h3>Trusted <em>Execution Environments</em>.</h3>
+      <p>ARM TrustZone과 Intel SGX 등 신뢰 실행 환경(TEE)을 활용한 OS·어플리케이션 보호 기법 — 경량 보안 OS, 스마트 컨트랙트 기밀성, DNN 추론 보호를 포함한 다양한 사용 사례에서의 격리 메커니즘을 연구합니다.</p>
+      <div class="tags"><span class="tag">TrustZone</span><span class="tag">Intel SGX</span><span class="tag">OS Security</span></div>
+      <div class="pubs"><b>대표 연구</b> &nbsp; PrOS [TMC '20] · Hypernel [DAC '18] · MECAT · TPMP · TzPy</div>
+      <div class="glyph">
+        <svg viewBox="0 0 200 200"><g fill="none" stroke="#5B8BFF" stroke-width="1.2"><polygon points="100,30 165,70 165,130 100,170 35,130 35,70"/><polygon points="100,60 140,80 140,120 100,140 60,120 60,80"/><circle cx="100" cy="100" r="6" fill="#2E6CFF" stroke="none"/></g></svg>
+      </div>
+    </article>
+
+    <article class="rcard size-c">
+      <div class="idx"><span>R / 04</span><span>active</span></div>
+      <h3>Application Security: <em>Wasm · ROS · Chain</em>.</h3>
+      <p>응용 어플리케이션의 특성에 맞춘 보안 솔루션 설계 — WebAssembly 런타임의 메모리 격리와 JIT 코드 보호, ROS 2 어플리케이션의 런타임 모니터링과 이상 탐지, 블록체인 스마트 컨트랙트의 기밀성과 무결성 보장을 폭넓게 다룹니다.</p>
+      <div class="tags"><span class="tag">WebAssembly</span><span class="tag">ROS 2</span><span class="tag">Blockchain</span><span class="tag">Smart Contract</span></div>
+      <div class="pubs"><b>대표 연구</b> &nbsp; ROSec [T-ASE '25] · WARD · WasDom · Watch Your Callback · SERA · TCST</div>
+      <div class="glyph">
+        <svg viewBox="0 0 200 200"><g fill="none" stroke="#5B8BFF" stroke-width="1.2"><circle cx="60" cy="60" r="14"/><circle cx="140" cy="60" r="14"/><circle cx="60" cy="140" r="14"/><circle cx="140" cy="140" r="14"/><circle cx="100" cy="100" r="20"/><path d="M60 60 L100 100 M140 60 L100 100 M60 140 L100 100 M140 140 L100 100"/></g></svg>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- NEWS + FEATURE -->
+<section class="section" id="projects" data-screen-label="04 Projects">
+  <div class="sec-head">
+    <span class="sec-num">— 03 / News &amp; Projects</span>
+    <h2 class="sec-title"><em>Recent news, </em><br/>And current Project.</h2>
+    <p class="sec-aside">논문, 수상, 공지사항을 기록합니다. 최근 업데이트 2026.03.30.</p>
+  </div>
+
+  <div class="news-block">
+    <div class="news-list">
+      <a class="news-row" href="#">
+        <span class="date">2026.03.30</span>
+        <span class="badge notice">특허</span>
+        <span class="title">“스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템” 국내 등록</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.03.01</span>
+        <span class="badge notice">과제</span>
+        <span class="title">한국연구재단 개인기초연구(우수신진연구) 과제 수주 — 온디바이스 피지컬 AI를 위한 TEE 기반 시스템 보안</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.02.26</span>
+        <span class="badge award">수상</span>
+        <span class="title">강정환 — BK21 사업단 참여대학원생 우수연구상 최우수상 수상</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.02.26</span>
+        <span class="badge award">수상</span>
+        <span class="title">신채원 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.01.27</span>
+        <span class="badge paper">SCIE</span>
+        <span class="title">“TzPy: Python Runtime for Edge Code Deployment on TrustZone” 저널 게재</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.01.23</span>
+        <span class="badge paper">SCIE</span>
+        <span class="title">“SERA: Secure Micro XRCE-DDS Establishment with Remote Attestation for micro-ROS” 저널 게재</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.01.14</span>
+        <span class="badge paper">SCIE</span>
+        <span class="title">“WARD: Efficient Memory Protection for WebAssembly on Tiny Embedded Systems” 저널 게재</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2026.01.08</span>
+        <span class="badge paper">SCIE</span>
+        <span class="title">“Beyond Address Spaces: In-process Memory Isolation for RISC-V” 저널 게재</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2025.12.22</span>
+        <span class="badge notice">장학</span>
+        <span class="title">박재열 — 한국장학재단 석사우수장학금(이공계) 장학생 선발</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2025.12.17</span>
+        <span class="badge notice">특허</span>
+        <span class="title">“임베디드 시스템 힙 메모리 공간 안전성 보장 방법” 국내 등록</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2025.12.12</span>
+        <span class="badge award">수상</span>
+        <span class="title">김경환 — ACSAC 2025 Capture The Flag (CTF) 2nd Place 수상</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2025.10.03</span>
+        <span class="badge paper">ACSAC '25</span>
+        <span class="title">“SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems” 채택 (BK21 우수국제학술대회)</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="news-row" href="#">
+        <span class="date">2025.10.03</span>
+        <span class="badge paper">ACSAC '25</span>
+        <span class="title">“ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M” 채택</span>
+        <span class="arr">→</span>
+      </a>
+    </div>
+
+    <aside class="feature">
+      <span class="ftag">Spotlight · 2026.Q1</span>
+      <h4>온디바이스 피지컬 AI를 위한 신뢰실행환경 기반 시스템 보안.</h4>
+      <p>한국연구재단 개인기초연구(우수신진연구) 신규 과제. ARM TrustZone · RISC-V 기반 임베디드 환경에서 동작하는 AI 모델과 센서 데이터 파이프라인을 위한 격리 · 원격검증 · 메모리 안전성 보장 기술을 통합 연구합니다.</p>
+      <div class="meta">
+        <div>FUNDING<b>한국연구재단 NRF</b></div>
+        <div>PERIOD<b>2026.03 — 진행 중</b></div>
+        <div>FOCUS<b>TEE · TrustZone · 메모리 안전성</b></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<section class="section" id="members" data-screen-label="05 Members">
+  <div class="sec-head">
+    <span class="sec-num">— 04 / Members</span>
+    <h2 class="sec-title">Researchers</h2>
+    <p class="sec-aside">박사과정 4명 · 석사과정 2명 · 학부연구생 7명 · Alumni.</p>
+  </div>
+
+  <div class="members-grid">
+    <article class="mcard"><div class="avatar">박</div><div class="nm">박성환</div><div class="role">박사과정</div><div class="focus">RISC-V · 메모리 격리</div></article>
+    <article class="mcard"><div class="avatar">강</div><div class="nm">강정환</div><div class="role">박사과정</div><div class="focus">임베디드 메모리 안전성</div></article>
+    <article class="mcard"><div class="avatar">송</div><div class="nm">송수현</div><div class="role">박사과정</div><div class="focus">WebAssembly 보안</div></article>
+    <article class="mcard"><div class="avatar">박</div><div class="nm">박재열</div><div class="role">박사과정</div><div class="focus">임베디드 스택 보호</div></article>
+    <article class="mcard"><div class="avatar">신</div><div class="nm">신채원</div><div class="role">석사과정</div><div class="focus">TrustZone · WebAssembly</div></article>
+    <article class="mcard"><div class="avatar">구</div><div class="nm">구윤주</div><div class="role">석사과정</div><div class="focus">스택 메모리 보호</div></article>
+    <article class="mcard"><div class="avatar">김</div><div class="nm">김경환</div><div class="role">학부연구생</div><div class="focus">ROS 2 · 메모리 안전성</div></article>
+    <article class="mcard"><div class="avatar">박</div><div class="nm">박정원</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard"><div class="avatar">전</div><div class="nm">전동훈</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard"><div class="avatar">홍</div><div class="nm">홍지연</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard"><div class="avatar">김</div><div class="nm">김지민</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard"><div class="avatar">김</div><div class="nm">김강건</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard"><div class="avatar">이</div><div class="nm">이도영</div><div class="role">학부연구생</div><div class="focus">—</div></article>
+    <article class="mcard" style="background:rgba(46,108,255,.04)"><div class="avatar">A</div><div class="nm">Alumni</div><div class="role">졸업생</div><div class="focus">강하영 (MS, 2026.02) — 한국전자통신연구원(ETRI)</div></article>
+  </div>
+</section>
+
+<!-- PUBLICATIONS placeholder anchor -->
+<section class="section" id="publications" data-screen-label="05b Publications" style="padding-top:0">
+  <div class="sec-head">
+    <span class="sec-num">— 05 / Publications</span>
+    <h2 class="sec-title">Recent <em> Paper</em>.</h2>
+    <p class="sec-aside">전체 목록은 DBLP 또는 Google Scholar에서 확인할 수 있습니다.</p>
+  </div>
+  <div class="news-list" style="max-width:980px">
+    <a class="news-row" href="#"><span class="date">2025</span><span class="badge paper">ACSAC</span><span class="title">SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems</span><span class="arr">→</span></a>
+    <a class="news-row" href="#"><span class="date">2025</span><span class="badge paper">ACSAC</span><span class="title">ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M</span><span class="arr">→</span></a>
+    <a class="news-row" href="#"><span class="date">2026</span><span class="badge paper">SCIE</span><span class="title">TzPy: Python Runtime for Edge Code Deployment on TrustZone</span><span class="arr">→</span></a>
+    <a class="news-row" href="#"><span class="date">2026</span><span class="badge paper">SCIE</span><span class="title">SERA: Secure Micro XRCE-DDS Establishment with Remote Attestation for micro-ROS</span><span class="arr">→</span></a>
+    <a class="news-row" href="#"><span class="date">2026</span><span class="badge paper">SCIE</span><span class="title">WARD: Efficient Memory Protection for WebAssembly on Tiny Embedded Systems</span><span class="arr">→</span></a>
+    <a class="news-row" href="#"><span class="date">2026</span><span class="badge paper">SCIE</span><span class="title">Beyond Address Spaces: In-process Memory Isolation for RISC-V</span><span class="arr">→</span></a>
+  </div>
+</section>
+
+<!-- PHOTOS placeholder anchor -->
+<section class="section" id="photos" data-screen-label="05c Photos" style="padding-top:0">
+  <div class="sec-head">
+    <span class="sec-num">— 06 / Photos</span>
+    <h2 class="sec-title">Photos.</h2>
+    <p class="sec-aside">학회 출장, MT, 금요일 CTF 모임의 기록.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)">
+    <div style="aspect-ratio:4/3;background:linear-gradient(135deg,#0E1530,#1F4DFF);display:grid;place-items:center;font-family:var(--mono);color:rgba(255,255,255,.78);font-size:11px;letter-spacing:.2em">USENIX '25</div>
+    <div style="aspect-ratio:4/3;background:linear-gradient(135deg,#0B1023,#5B8BFF);display:grid;place-items:center;font-family:var(--mono);color:rgba(255,255,255,.78);font-size:11px;letter-spacing:.2em">LAB MT</div>
+    <div style="aspect-ratio:4/3;background:linear-gradient(135deg,#102050,#0E1530);display:grid;place-items:center;font-family:var(--mono);color:rgba(255,255,255,.78);font-size:11px;letter-spacing:.2em">CTF 금요일</div>
+    <div style="aspect-ratio:4/3;background:linear-gradient(135deg,#0E1530,#06080F);display:grid;place-items:center;font-family:var(--mono);color:rgba(255,255,255,.78);font-size:11px;letter-spacing:.2em">졸업식</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact" data-screen-label="07 Contact">
+  <div class="contact-block">
+    <h2 class="big-q">CSLAB<br/><em>Details for contact</em><br/></h2>
+    <div class="contact-info">
+      <div class="row"><span class="k">Email</span><a href="mailto:cslab@pusan.ac.kr">cslab@pusan.ac.kr</a></div>
+      <div class="row"><span class="k">Office</span>공과대학 IT관(102동) 703호<br/>부산광역시 금정구 부산대학로63번길 2</div>
+      <div class="row"><span class="k">Recruit</span>석사 · 박사 · 학부 인턴<br/>지원: 2026.04 — 2026.06.30</div>
+      <div class="row"><span class="k">GitHub</span><a href="#">github.com/cslab-pnu</a></div>
+      <div class="row"><span class="k">DBLP</span><a href="#">dblp.org / cslab-pnu</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <span>© 2026 컴퓨터 보안 연구실 · 부산대학교</span>
+    <span>Designed in Busan · Built by lab members</span>
+    <span><a href="#top">맨 위로 ↑</a></span>
+  </div>
+</footer>
+
+<script>
+  // Active nav highlighting
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav a");
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  sections.forEach(s => obs.observe(s));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      if(id.length > 1 && document.querySelector(id)){
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
