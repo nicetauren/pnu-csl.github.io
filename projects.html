@@ -27,6 +27,12 @@
 .past h4{font-family:var(--sans);font-weight:600;font-size:14px;line-height:1.4;color:var(--ink);margin:4px 0 6px;letter-spacing:-.01em;text-wrap:pretty}
 .past .pmeta-s{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);line-height:1.55;letter-spacing:.02em;margin-top:auto;padding-top:10px;border-top:1px dashed var(--line)}
 .past .pmeta-s b{font-family:var(--sans);font-weight:500;color:var(--ink-2);letter-spacing:0}
+:root[data-theme="dark"] .past{background:var(--panel);border-color:var(--line)}
+:root[data-theme="dark"] .past h4{color:var(--ink)}
+:root[data-theme="dark"] .past .pmeta-s{border-top-color:var(--line-strong);color:var(--ink-3)}
+:root[data-theme="dark"] .past .pmeta-s b{color:var(--ink-2)}
+:root[data-theme="dark"] .past .ptag{color:var(--ink-3);border-color:var(--line-strong)}
+:root[data-theme="dark"] .past .pidx{color:var(--accent)}
 @media (max-width: 980px){
   .proj{grid-column:span 12}
   .past-grid{grid-template-columns:repeat(2,1fr)}

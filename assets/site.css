@@ -18,6 +18,12 @@
   --grid:rgba(255,255,255,.04);
 }
 :root[data-theme="dark"] img,:root[data-theme="dark"] iframe{filter:none}
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after{
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease, fill .35s ease, box-shadow .35s ease !important;
+}
 :root[data-theme="dark"] .brand img.logo{filter:invert(1) hue-rotate(180deg)}
 :root[data-theme="dark"] .news-row .badge.paper{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-2);cursor:pointer;margin-left:10px;transition:color .2s,border-color .2s,background .2s}
@@ -34,10 +40,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;bac
 .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 36px;backdrop-filter:blur(14px);background:var(--topbar-bg);border-bottom:1px solid var(--line);}
 .brand{display:flex;align-items:center;text-decoration:none;color:var(--ink)}
 .brand img.logo{height:38px;width:auto;display:block}
-.nav{display:flex;gap:2px;align-items:center}
-.nav a{color:var(--ink-2);text-decoration:none;font-size:13px;letter-spacing:.02em;padding:8px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;transition:color .2s,background .2s;}
+.nav{display:flex;gap:3px;align-items:center}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:18px;letter-spacing:.02em;padding:11px 20px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;transition:color .2s,background .2s;}
 .nav a:hover{color:var(--ink);background:rgba(0,0,0,.04)}
-.nav a .num{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.nav a .num{font-family:var(--mono);font-size:14px;color:var(--ink-3)}
 .nav a.active{color:var(--ink)}
 .nav a.active .num{color:var(--accent)}
 .topbar .right{display:flex;align-items:center;gap:14px}

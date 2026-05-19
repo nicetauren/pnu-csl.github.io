@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Members · CSLab @ PNU</title>
-<script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779152926133&amp;type=content-script&amp;dmn=claude.ai&amp;url=https%3A%2F%2Fclaude.ai%2Fdesign%2Fv1%2Fdesign%2Fprojects%2F019dd8aa-68fd-7b9c-9150-23cb869c70c3%2Fdownload%3Fpath%3Dmembers.html&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script><script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779152926133&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link rel="preconnect" href="https://fonts.googleapis.com"/>
+<script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779165535892&amp;type=content-script&amp;dmn=claude.ai&amp;url=https%3A%2F%2Fclaude.ai%2Fdesign%2Fv1%2Fdesign%2Fprojects%2F019dd8aa-68fd-7b9c-9150-23cb869c70c3%2Fdownload%3Fpath%3Dmembers.html&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script><script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779165535892&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
@@ -13,7 +13,8 @@
 .prof{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start;padding:40px 0 80px;border-bottom:1px solid var(--line)}
 .prof .portrait{position:relative;aspect-ratio:4/5;background:var(--panel);overflow:hidden;border-radius:4px;max-width:50%}
 .prof .portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
-.prof .portrait .badge{position:absolute;top:14px;left:14px;background:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 10px;border-radius:4px}
+.prof .portrait .badge{position:absolute;top:14px;left:14px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 10px;border-radius:4px}
+:root[data-theme="dark"] .prof .portrait .badge{background:var(--panel);color:var(--ink)}
 .prof h2{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1;margin:0 0 8px;letter-spacing:-.02em}
 .prof h2 em{font-style:italic;color:var(--accent)}
 .prof .title-en{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-bottom:24px}
@@ -27,7 +28,9 @@
 .role-band .lbl{font-family:var(--serif);font-style:italic;font-size:32px}
 .role-band .cnt{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.16em}
 .member-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:18px}
-.mcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;text-decoration:none;color:inherit}
+.mcard{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;text-decoration:none;color:inherit}
+:root[data-theme="dark"] .mcard{background:var(--panel);border-color:var(--line)}
+:root[data-theme="dark"] .mcard:hover{box-shadow:0 12px 28px -18px rgba(123,160,255,.4)}
 .mcard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 28px -18px rgba(20,60,172,.4)}
 .mcard .ph{aspect-ratio:1/1.18;background:var(--panel);overflow:hidden;position:relative}
 .mcard .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1)}

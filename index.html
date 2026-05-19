@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779152926133&amp;type=content-script&amp;dmn=claude.ai&amp;url=https%3A%2F%2Fclaude.ai%2Fdesign%2Fv1%2Fdesign%2Fprojects%2F019dd8aa-68fd-7b9c-9150-23cb869c70c3%2Fdownload%3Fpath%3Dindex.html&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script><script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779152926133&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><script>try{if(localStorage.getItem('cslab-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
+<script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779165535892&amp;type=content-script&amp;dmn=claude.ai&amp;url=https%3A%2F%2Fclaude.ai%2Fdesign%2Fv1%2Fdesign%2Fprojects%2F019dd8aa-68fd-7b9c-9150-23cb869c70c3%2Fdownload%3Fpath%3Dindex.html&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script><script type="text/javascript" nonce="02c371803e5c4184a07038f6e55" src="//local.adguard.org?ts=1779165535892&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script><script>try{if(localStorage.getItem('cslab-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CSLab @ PNU — 컴퓨터 보안 연구실</title>
@@ -24,6 +24,12 @@
     --grid:rgba(255,255,255,.04) !important;
   }
   :root[data-theme="dark"] body{background:#0B0B0D}
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after{
+    transition: background-color .35s ease, color .35s ease, border-color .35s ease, fill .35s ease, box-shadow .35s ease !important;
+  }
   :root[data-theme="dark"] .nav a:hover{background:rgba(255,255,255,.06)}
   :root[data-theme="dark"] .btn.ghost:hover{background:rgba(255,255,255,.04)}
   :root{
@@ -67,14 +73,14 @@
   }
   .brand{display:flex;align-items:center;text-decoration:none;color:var(--ink)}
   :root[data-theme="dark"] .brand img.logo{filter:invert(1) hue-rotate(180deg)}
-  .nav{display:flex;gap:2px;align-items:center}
+  .nav{display:flex;gap:3px;align-items:center}
   .nav a{
-    color:var(--ink-2);text-decoration:none;font-size:13px;letter-spacing:.02em;
-    padding:8px 14px;border-radius:999px;
-    display:inline-flex;align-items:center;gap:6px;transition:color .2s, background .2s;
+    color:var(--ink-2);text-decoration:none;font-size:18px;letter-spacing:.02em;
+    padding:11px 20px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:8px;transition:color .2s, background .2s;
   }
   .nav a:hover{color:var(--ink);background:rgba(0,0,0,.04)}
-  .nav a .num{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+  .nav a .num{font-family:var(--mono);font-size:14px;color:var(--ink-3)}
   .nav a.active{color:var(--ink)}
   .nav a.active .num{color:var(--accent)}
   .brand img.logo{height:38px;width:auto;display:block}
@@ -352,7 +358,8 @@
 
   /* Contact */
   .contact-block{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end}
-  .big-q{font-family:var(--serif);font-size:clamp(48px,6.5vw,96px);line-height:.95;letter-spacing:-.02em;margin:0;color:var(--ink)}
+  .big-q{font-family:var(--serif);font-size:clamp(48px,6.5vw,96px);line-height:.95;letter-spacing:-.02em;margin:0;color:var(--ink);max-width:800px;overflow-wrap:break-word;word-break:keep-all}
+  .big-q-sub{font-size:clamp(36px,5.2vw,80px)}
   .big-q em{font-style:italic;color:var(--accent)}
   .contact-info{font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1.9}
   .contact-info .row{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
@@ -360,6 +367,12 @@
   .contact-info .k{color:var(--ink-3);letter-spacing:.18em;text-transform:uppercase;font-size:11px}
   .contact-info a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border .2s, color .2s}
   .contact-info a:hover{border-color:var(--accent);color:var(--accent)}
+  #contact .contact-block{max-width:100%}
+  #contact .contact-info{min-width:0}
+  #contact .contact-info .row{word-break:break-word;overflow-wrap:anywhere}
+  @media(max-width:720px){
+    #contact .contact-info .row{grid-template-columns:64px 1fr;gap:10px}
+  }
 
   /* Footer */
   footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:60px 36px 40px;margin-top:60px}
@@ -750,12 +763,13 @@
 <section class="section" id="news" data-screen-label="04 News">
   <div class="sec-head">
     <span class="sec-num">— 03 / News</span>
-    <h2 class="sec-title"><em>Recent</em><br/>News.</h2>
+    <h2 class="sec-title"><em>Recent</em> News.</h2>
     <p class="sec-aside">논문 · 수상 · 과제 · 공지사항을 시간 순으로 기록합니다. 최근 업데이트 2026.03.30.</p>
   </div>
 
   <div class="news-toolbar">
-    <h2>Recent <em>News</em>.</h2>
+    <h2>
+</h2>
     <div class="filter">
       <button class="on" data-f="all">All</button>
       <button data-f="paper">Paper</button>
@@ -941,7 +955,7 @@
 <!-- CONTACT -->
 <section class="section" id="contact" data-screen-label="07 Contact">
   <div class="contact-block">
-    <h2 class="big-q" style="width: 800px">Computer Security Lab,<br/><em><span style="font-size: 80px">@ Pusan National University.</span></em></h2>
+    <h2 class="big-q">Computer Security Lab,<br/><em><span class="big-q-sub">@ Pusan National University.</span></em></h2>
     <div class="contact-info">
       <div class="row"><span class="k">Tel</span>051-510-2874</div>
       <div class="row"><span class="k">Email</span><a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a></div>
@@ -1020,9 +1034,14 @@
     btn.addEventListener('click', () => {
       const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
       const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.classList.add('theme-transition');
       if(next === 'dark') document.documentElement.setAttribute('data-theme','dark');
       else document.documentElement.removeAttribute('data-theme');
       try{ localStorage.setItem('cslab-theme', next); }catch(e){}
+      clearTimeout(window.__cslabThemeTo);
+      window.__cslabThemeTo = setTimeout(() => {
+        document.documentElement.classList.remove('theme-transition');
+      }, 450);
     });
   })();
   // Recruit modal

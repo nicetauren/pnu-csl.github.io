@@ -31,10 +31,13 @@
 .topic .pubs a .arr{font-family:var(--mono);font-size:11px;color:var(--ink-3);opacity:0;transition:opacity .15s,transform .15s}
 .topic .pubs a:hover .arr{opacity:1;transform:translateX(2px);color:var(--accent)}
 .topic figure{margin:0;position:sticky;top:96px}
-.topic figure .frame{background:#fff;border:1px solid var(--line);position:relative;overflow:hidden;border-radius:4px;padding:18px}
+.topic figure .frame{background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden;border-radius:4px;padding:18px}
+:root[data-theme="dark"] .topic figure .frame{background:var(--panel)}
 .topic figure .frame img{width:100%;height:auto;display:block}
 .topic figure .meta{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:14px;background:var(--line);border:1px solid var(--line)}
-.topic figure .meta div{background:#fff;padding:14px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
+.topic figure .meta div{background:var(--bg);padding:14px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase}
+:root[data-theme="dark"] .topic figure .meta{background:var(--line-strong)}
+:root[data-theme="dark"] .topic figure .meta div{background:var(--panel)}
 .topic figure .meta div b{display:block;font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;margin-top:6px}
 @media(max-width:1100px){.topic{grid-template-columns:1fr;gap:24px}.topic figure{position:static}}
 </style>
