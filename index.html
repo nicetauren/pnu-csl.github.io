@@ -581,7 +581,7 @@
     <div class="meta-row">
       <div class="cell"><span class="k">Location</span><span class="v">부산대학교 장전캠퍼스 IT관 703호</span></div>
       <div class="cell"><span class="k">Tel</span><span class="v">051-510-2874</span></div>
-      <div class="cell"><span class="k">Email</span><span class="v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14574758555654647a6177677875763a777b79">[email&#160;protected]</a></span></div>
+      <div class="cell"><span class="k">Email</span><span class="v"><span class="js-email" data-u="CSLAB" data-d="pnucslab.com"></span></span></div>
     </div>
   </div>
   <div class="hero-art" aria-hidden="true" style="width:100%;aspect-ratio:1/1;height:auto">
@@ -628,7 +628,7 @@
       <p class="note">학부연구생이나 대학원 진학에 관심 있으신 분들의 많은 연락 바랍니다.</p>
       <div class="contact-card">
         <div class="row"><span class="k">Tel</span><span>051-510-2874</span></div>
-        <div class="row"><span class="k">Email</span><a href="/cdn-cgi/l/email-protection#3c7f6f707d7e7c4c52495f4f505d5e125f5351"><span class="__cf_email__" data-cfemail="f9baaab5b8bbb989978c9a8a95989bd79a9694">[email&#160;protected]</span></a></div>
+        <div class="row"><span class="k">Email</span><a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a></div>
       </div>
     </div>
   </div>
@@ -944,9 +944,9 @@
     <h2 class="big-q" style="width: 800px">Computer Security Lab,<br/><em><span style="font-size: 80px">@ Pusan National University.</span></em></h2>
     <div class="contact-info">
       <div class="row"><span class="k">Tel</span>051-510-2874</div>
-      <div class="row"><span class="k">Email</span><a href="/cdn-cgi/l/email-protection#6c2f3f202d2e2c1c02190f1f000d0e420f0301"><span class="__cf_email__" data-cfemail="4605150a07040636283325352a27246825292b">[email&#160;protected]</span></a></div>
+      <div class="row"><span class="k">Email</span><a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a></div>
       <div class="row"><span class="k">Office</span>IT관(102동) 703호<br/>부산광역시 금정구 부산대학로63번길 2</div>
-      <div class="row" style="grid-template-columns:80px 1fr;align-items:start"><span class="k">Inquiry</span><span>학부연구생 및 대학원 지원, 인턴 문의는 <a href="/cdn-cgi/l/email-protection#7d3e2e313c3f3d0d13081e0e111c1f531e1210"><span class="__cf_email__" data-cfemail="8dcedec1cccfcdfde3f8eefee1ecefa3eee2e0">[email&#160;protected]</span></a>으로 연락 바랍니다.</span></div>
+      <div class="row" style="grid-template-columns:80px 1fr;align-items:start"><span class="k">Inquiry</span><span>학부연구생 및 대학원 지원, 인턴 문의는 <a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a>으로 연락 바랍니다.</span></div>
     </div>
   </div>
 </section>
@@ -954,12 +954,24 @@
 <footer>
   <div class="row">
     <span>© 2026 Computer Security Lab, Pusan National University</span>
-    <span>TEL 051-510-2874 · <a href="/cdn-cgi/l/email-protection#1e5d4d525f5c5e6e706b7d6d727f7c307d7173" style="color:inherit;text-decoration:none"><span class="__cf_email__" data-cfemail="fdbeaeb1bcbfbd8d93889e8e919c9fd39e9290">[email&#160;protected]</span></a></span>
+    <span>TEL 051-510-2874 · <a class="js-email" data-u="CSLAB" data-d="pnucslab.com" style="color:inherit;text-decoration:none"></a></span>
     <span><a href="#top">맨 위로 ↑</a></span>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // Email obfuscation decoder — avoids Cloudflare / auto-protection
+  (function(){
+    const AT = String.fromCharCode(64);
+    document.querySelectorAll('.js-email').forEach(el => {
+      const u = el.getAttribute('data-u');
+      const d = el.getAttribute('data-d');
+      if(!u || !d) return;
+      const addr = u + AT + d;
+      if(el.tagName === 'A') el.setAttribute('href', 'mai' + 'lto:' + addr);
+      if(!el.textContent.trim()) el.textContent = addr;
+    });
+  })();
   // Smooth scroll for same-page anchors
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener("click", (e) => {

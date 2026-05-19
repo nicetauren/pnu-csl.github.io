@@ -66,7 +66,7 @@
   <footer>
     <div class="row">
       <span>© 2026 Computer Security Lab, Pusan National University</span>
-      <span>TEL 051-510-2874 · <a href="mailto:CSLAB@pnucslab.com" style="color:inherit;text-decoration:none">CSLAB@pnucslab.com</a></span>
+      <span>TEL 051-510-2874 · <a class="js-email" data-u="CSLAB" data-d="pnucslab.com" style="color:inherit;text-decoration:none"></a></span>
       <span><a href="#top">맨 위로 ↑</a></span>
     </div>
   </footer>`;
@@ -92,5 +92,26 @@
     if(h) h.innerHTML = headerHtml;
     if(f) f.innerHTML = footerHtml;
     wireDrawer();
+    wireEmails();
   });
+
+  /* Email obfuscation decoder.
+     Any element with class "js-email" + data-u (local part) + data-d (domain)
+     gets its mailto href + visible text filled in at runtime.
+     Avoids Cloudflare / GitHub email-auto-protection. */
+  function wireEmails(){
+    const AT = String.fromCharCode(64);
+    document.querySelectorAll('.js-email').forEach(el => {
+      const u = el.getAttribute('data-u');
+      const d = el.getAttribute('data-d');
+      if(!u || !d) return;
+      const addr = u + AT + d;
+      if(el.tagName === 'A'){
+        el.setAttribute('href', 'mai' + 'lto:' + addr);
+      }
+      if(!el.textContent.trim()){
+        el.textContent = addr;
+      }
+    });
+  }
 })();

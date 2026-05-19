@@ -695,7 +695,7 @@
   <div class="contact-block">
     <h2 class="big-q">CSLAB<br/><em>Details for contact</em><br/></h2>
     <div class="contact-info">
-      <div class="row"><span class="k">Email</span><a href="/cdn-cgi/l/email-protection#aecdddc2cfcceededbddcfc080cfcd80c5dc"><span class="__cf_email__" data-cfemail="81e2f2ede0e3c1f1f4f2e0efafe0e2afeaf3">[email&#160;protected]</span></a></div>
+      <div class="row"><span class="k">Email</span><a class="js-email" data-u="cslab" data-d="pusan.ac.kr"></a></div>
       <div class="row"><span class="k">Office</span>공과대학 IT관(102동) 703호<br/>부산광역시 금정구 부산대학로63번길 2</div>
       <div class="row"><span class="k">Recruit</span>석사 · 박사 · 학부 인턴<br/>지원: 2026.04 — 2026.06.30</div>
       <div class="row"><span class="k">GitHub</span><a href="#">github.com/cslab-pnu</a></div>
@@ -712,7 +712,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Active nav highlighting
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav a");
@@ -736,6 +736,19 @@
       }
     });
   });
+
+  // Email obfuscation decoder — avoids Cloudflare / auto-protection
+  (function(){
+    const AT = String.fromCharCode(64);
+    document.querySelectorAll('.js-email').forEach(el => {
+      const u = el.getAttribute('data-u');
+      const d = el.getAttribute('data-d');
+      if(!u || !d) return;
+      const addr = u + AT + d;
+      if(el.tagName === 'A') el.setAttribute('href', 'mai' + 'lto:' + addr);
+      if(!el.textContent.trim()) el.textContent = addr;
+    });
+  })();
 </script>
 
 </body>
